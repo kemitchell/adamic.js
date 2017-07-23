@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "[0-9a-f]{64}"
+    },
+    "number": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "prior": {
+      "type": "string",
+      "pattern": "[0-9a-f]{64}"
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "message": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "number",
+    "prior",
+    "time",
+    "message"
+  ],
+  "additionaProperties": false
+}
