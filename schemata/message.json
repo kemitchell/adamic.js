@@ -17,8 +17,12 @@
       "type": "string",
       "format": "date-time"
     },
-    "message": {
+    "payload": {
       "type": "object"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "[0-9a-f]{128}"
     }
   },
   "required": [
@@ -26,7 +30,8 @@
     "number",
     "prior",
     "time",
-    "message"
+    "payload",
+    "signature"
   ],
   "additionaProperties": false
 }

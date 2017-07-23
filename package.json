@@ -1,0 +1,16 @@
+{
+  "name": "adamic",
+  "version": "0.0.0",
+  "description": "and whatsoever Adam called every living creature, that was the name thereof",
+  "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com/)",
+  "repository": "kemitchell/adamic.js",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ajv": "^5.2.2",
+    "ecb": "^1.0.0",
+    "json-stable-stringify": "^1.0.1"
+  },
+  "devDependencies": {
+    "ed25519": "0.0.4"
+  }
+}
