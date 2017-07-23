@@ -20,11 +20,7 @@ module.exports = function (state, message, callback) {
     callback(new Error('invalid signature'))
   } else {
     state.head(message.id, ecb(function (head) {
-      if (message.number - head.number !== -1) {
-        callback(new Error(
-          'expected message number ' + (head.number + 1)
-        ))
-      } else if (message.prior !== head.hexDigest) {
+      if (message.prior !== head) {
         callback(new Error('prior digest mismatch'))
       } else {
         var payload = message.payload

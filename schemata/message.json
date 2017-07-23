@@ -5,10 +5,6 @@
       "type": "string",
       "pattern": "[0-9a-f]{64}"
     },
-    "number": {
-      "type": "integer",
-      "minimum": 0
-    },
     "prior": {
       "type": "string",
       "pattern": "[0-9a-f]{64}"
@@ -23,7 +19,6 @@
   },
   "required": [
     "id",
-    "number",
     "prior",
     "payload",
     "signature"
