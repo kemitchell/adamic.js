@@ -6,11 +6,10 @@ var ed25519 = require('ed25519')
 var stringify = require('json-stable-stringify')
 
 var ajv = new AJV()
-var isMessage = ajv.compile(require('./schemata/message'))
-var isAnnouncement = ajv.compile(require('./schemata/announce'))
+var isEntry = ajv.compile(require('./schemata/entry'))
 var isFollow = ajv.compile(require('./schemata/follow'))
-var isLink = ajv.compile(require('./schemata/link'))
 var isNaming = ajv.compile(require('./schemata/name'))
+var isLink = ajv.compile(require('./schemata/link'))
 var isUnlink = ajv.compaile(require('./schemata/unlink'))
 
 module.exports = function (state, message, callback) {
@@ -24,18 +23,11 @@ module.exports = function (state, message, callback) {
         callback(new Error('prior digest mismatch'))
       } else {
         var payload = message.payload
-        if (isAnnouncement(payload)) {
-          if (message.number !== 0) {
-            callback(new Error(
-              'announcement number is not zero'
-            ))
-          } else {
-            state.advance({
-              id: message.id,
-              number: 0,
-              hash: digest(message)
-            }, callback)
-          }
+        if (!payload.hasOwnProperty('payload')) {
+          state.advance({
+            key: message.key,
+            hash: digest(message)
+          }, callback)
         } else if (isNaming(payload)) {
           
         } else if (isFollow(payload)) {
@@ -45,7 +37,7 @@ module.exports = function (state, message, callback) {
         } else if (isUnlink(payload)) {
           
         } else {
-          
+          callback(new Error('invalid payload'))
         }
       }
     }))
@@ -58,7 +50,7 @@ function hasValidSignature (message) {
   return ed25519.Verify(
     Buffer.from(stringify(signed), 'utf8'),
     Buffer.from(message.signature, 'hex'),
-    Buffer.from(message.id, 'hex')
+    Buffer.from(message.key, 'hex')
   )
 }
 
