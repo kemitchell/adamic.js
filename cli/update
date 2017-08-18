@@ -1,0 +1,49 @@
+#!/usr/bin/env node
+var DIRECTORY = require('../data/directory')
+var https = require('https')
+var mkdirp = require('mkdirp')
+var path = require('path')
+var pump = require('pump')
+var readURLs = require('../data/read-urls')
+var runParallel = require('run-parallel')
+var runSeries = require('run-series')
+var sha256 = require('../util/sha256')
+
+readURLs(function (error, urls) {
+  if (error) {
+    console.error(error)
+    process.exit(1)
+  }
+  runParallel(
+    urls.map(function (url) {
+      return function (done) {
+        https.get(url)
+          .once('error', done)
+          .once('response', function (response) {
+            if (response.statusCode !== 200) {
+              return done(
+                new Error('server responded ' + response.statusCode)
+              )
+            }
+            var digest = sha256(url)
+            var file = path.join(DIRECTORY, 'logs', digest)
+            runSeries([
+              function (done) {
+                mkdirp(path.dirname(file), done)
+              },
+              function (done) {
+                pump(response, file, done)
+              }
+            ], done)
+          })
+      }
+    }),
+    function (error) {
+      if (error) {
+        console.error(error)
+        return process.exit(1)
+      }
+      process.exit(0)
+    }
+  )
+})

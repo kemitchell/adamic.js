@@ -1,0 +1,37 @@
+#!/usr/bin/env node
+if (!process.argv[2]) {
+  console.error('Usage: <URL>')
+  process.exit(1)
+}
+
+var URLS = require('../paths/urls')
+var fs = require('fs')
+var mkdirp = require('mkdirp')
+var path = require('path')
+var readURLs = require('../data/read-urls')
+var runSeries = require('run-series')
+
+var URL = process.argv[2]
+readURLs(function (error, urls) {
+  if (error) {
+    console.error(error)
+    process.exit(1)
+  }
+  if (urls.indexOf(URL) !== -1) {
+    process.exit(0)
+  }
+  runSeries([
+    function (done) {
+      mkdirp(path.dirname(URLS), done)
+    },
+    function (done) {
+      fs.appendFile(URLS, URL + '\n', function (error) {
+        if (error) {
+          console.error(error)
+          process.exit(1)
+        }
+        process.exit(0)
+      })
+    }
+  ])
+})

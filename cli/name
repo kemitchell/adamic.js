@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+if (process.argv.length < 5) {
+  console.error('Usage: <hash> <digest> <name...>')
+  process.exit(0)
+}
+
+var hash = process.argv[2]
+failOnError(require('../validate/hash')(hash))
+
+var digest = process.argv[3]
+failOnError(require('../validate/digest')(hash, digest))
+
+var name = process.argv.slice(4)
+failOnError(require('../validate/name')(name))
+
+function failOnError (errors) {
+  if (errors.length !== 0) {
+    errors.forEach(function (error) {
+      console.error(error)
+    })
+    process.exit(1)
+  }
+}
+
+require('../data/read-mappings')(function (error, mappings) {
+  if (error) {
+    console.error(error)
+    process.exit(1)
+  }
+  var sameName = require('../util/same-name')
+  if (mappings.some(function (mapping) {
+    return sameName(mapping.name, name)
+  })) {
+    console.error(
+      'already named: ' + require('../util/display-name')(name)
+    )
+    process.exit(1)
+  }
+  var entry = {
+    type: 'name',
+    name: name,
+    hash: hash,
+    digest: digest
+  }
+  require('run-parallel')([
+    function (done) {
+      require('../data/append-entry')(entry, done)
+    },
+    function (done) {
+      require('fs').appendFile(
+        require('../paths/mapping'),
+        require('json-stable-stringify')(entry) + '\n',
+        done
+      )
+    }
+  ], function (error) {
+    if (error) {
+      console.error(error)
+      process.exit(1)
+    }
+    process.exit(0)
+  })
+})
