@@ -26,8 +26,7 @@ module.exports = function (callback) {
           },
           function (done) {
             var entry = {
-              date: new Date().toISOString(),
-              public: keypair.publicKey.toString('hex')
+              key: keypair.publicKey.toString('hex')
             }
             var signature = ed25519.Sign(
               Buffer.from(stringify(entry), 'utf8'),

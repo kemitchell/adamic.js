@@ -1,0 +1,13 @@
+{
+  "type": "object",
+  "properties": {
+    "public": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    }
+  },
+  "required": [
+    "public"
+  ],
+  "additionalProperties": false
+}

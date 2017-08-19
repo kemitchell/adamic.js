@@ -1,0 +1,32 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "attest"
+    },
+    "identity": {
+      "type": "string",
+      "pattern": "^[0-9a-z]+$",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "key": {
+      "description": "public key to identify",
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "through": {
+      "description": "digest of the last log entry attested",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "type",
+    "identity",
+    "key",
+    "through"
+  ],
+  "additionalProperties": false
+}

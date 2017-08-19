@@ -1,0 +1,33 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "deidentify"
+    },
+    "identity": {
+      "description": "string to identify",
+      "type": "string",
+      "pattern": "^[0-9a-z]+$",
+      "minLength": 1,
+      "maxLength": 32
+    },
+    "key": {
+      "description": "public key to identify",
+      "type": "string",
+      "pattern": "^[0-9a-f]{32}$"
+    },
+    "after": {
+      "description": "digest of the last log entry from the key to identify",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "type",
+    "identity",
+    "key",
+    "after"
+  ],
+  "additionalProperties": false
+}

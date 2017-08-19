@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var DIRECTORY = require('../data/directory')
-var https = require('https')
+var http = require('http-https')
 var mkdirp = require('mkdirp')
 var path = require('path')
 var pump = require('pump')

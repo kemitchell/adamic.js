@@ -10,17 +10,17 @@ var runSeries = require('run-series')
 var sha256 = require('../util/sha256')
 var stringify = require('json-stable-stringify')
 
-module.exports = function (entry, callback) {
+module.exports = function (data, callback) {
   readKeys(ecb(callback, function (keys) {
     readLastEntry(ecb(callback, function (priorEntry) {
       var priorDigest = sha256(stringify(priorEntry))
       var signature = ed25519.Sign(
-        Buffer.from(stringify(entry), 'utf8'),
+        Buffer.from(stringify(data), 'utf8'),
         keys.private
       )
       var json = stringify({
         prior: priorDigest,
-        entry: entry,
+        data: data,
         signature: signature.toString('hex')
       })
       var nextDigest = sha256(json)

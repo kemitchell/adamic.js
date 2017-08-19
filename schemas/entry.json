@@ -1,0 +1,24 @@
+{
+  "type": "object",
+  "properties": {
+    "data": {
+      "description": "data payload",
+      "type": "object"
+    },
+    "signature": {
+      "description": "hex-encoded Ed25519 signature",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "prior": {
+      "description": "hex-encoded SHA-256 digest of prior entry",
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    }
+  },
+  "required": [
+    "data",
+    "signature"
+  ],
+  "additionalProperties": false
+}

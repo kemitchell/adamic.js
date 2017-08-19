@@ -1,0 +1,46 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "const": "name"
+    },
+    "them": {
+      "$ref": "#/definitions/identity"
+    },
+    "their": {
+      "$ref": "#/definitions/name"
+    },
+    "mine": {
+      "$ref": "#/definitions/name"
+    }
+  },
+  "required": [
+    "type",
+    "them",
+    "their",
+    "mine"
+  ],
+  "additionalProperties": false,
+  "definitions": {
+    "name": {
+      "description": "list of names for the artifact",
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 4,
+      "items": {
+        "type": "string",
+        "pattern": "^[0-9a-z]+$",
+        "minLength": 1,
+        "maxLength": 32
+      }
+    },
+    "identity": {
+      "description": "string to identify",
+      "type": "string",
+      "pattern": "^[0-9a-z]+$",
+      "minLength": 1,
+      "maxLength": 32
+    }
+  }
+}
