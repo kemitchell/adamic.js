@@ -16,12 +16,21 @@
       "descrption": "public key to identify",
       "type": "string",
       "pattern": "^[0-9a-f]{32}$"
+    },
+    "uris": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "uri"
+      }
     }
   },
   "required": [
     "type",
     "identity",
-    "key"
+    "key",
+    "uris"
   ],
   "additionalProperties": false
 }

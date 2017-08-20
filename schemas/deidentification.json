@@ -17,6 +17,14 @@
       "type": "string",
       "pattern": "^[0-9a-f]{32}$"
     },
+    "uris": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "uri"
+      }
+    }
     "after": {
       "description": "digest of the last log entry from the key to identify",
       "type": "string",
@@ -27,6 +35,7 @@
     "type",
     "identity",
     "key",
+    "uris",
     "after"
   ],
   "additionalProperties": false

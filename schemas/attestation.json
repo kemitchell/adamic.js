@@ -16,6 +16,14 @@
       "type": "string",
       "pattern": "^[0-9a-f]{32}$"
     },
+    "uris": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "uri"
+      }
+    },
     "through": {
       "description": "digest of the last log entry attested",
       "type": "string",
@@ -26,6 +34,7 @@
     "type",
     "identity",
     "key",
+    "uris",
     "through"
   ],
   "additionalProperties": false
