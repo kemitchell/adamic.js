@@ -8,11 +8,8 @@ var through2 = require('through2')
 
 var ajv = new AJV()
 ajv.addSchema('entry', require('../schemas/entry'))
-ajv.addSchema('announcement', require('../schemas/announcement'))
-var dataSchemas = [
-  'adoption', 'attestation', 'deidentification',
-  'identification', 'naming'
-]
+ajv.addSchema('announce', require('../schemas/announce'))
+var dataSchemas = ['adopt', 'attest', 'deidentify', 'identify', 'name']
 dataSchemas.forEach(function (name) {
   ajv.addSchema(name, require('../schemas/' + name))
 })
@@ -30,7 +27,7 @@ module.exports = function () {
       // The first entry in a log must be an announcement of
       // the Ed25519 public key.
       if (first) {
-        ajv.validate('announcement', data)
+        ajv.validate('announce', data)
         if (ajv.errors) return failed('invalid announcement')
         publicKey = Buffer.from(data.key, 'hex')
       // After the first, announcement entry, each entry must link back
