@@ -9,7 +9,7 @@ var through2 = require('through2')
 var ajv = new AJV()
 ajv.addSchema('entry', require('../schemas/entry'))
 ajv.addSchema('announce', require('../schemas/announce'))
-var dataSchemas = ['adopt', 'attest', 'deidentify', 'identify', 'name']
+var dataSchemas = ['adopt', 'attest', 'renounce', 'identify', 'name']
 dataSchemas.forEach(function (name) {
   ajv.addSchema(name, require('../schemas/' + name))
 })

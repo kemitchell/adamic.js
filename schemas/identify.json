@@ -5,13 +5,6 @@
       "type": "string",
       "const": "identify"
     },
-    "identity": {
-      "description": "string to identify",
-      "type": "string",
-      "pattern": "^[0-9a-z]+$",
-      "minLength": 1,
-      "maxLength": 32
-    },
     "key": {
       "descrption": "public key to identify",
       "type": "string",
