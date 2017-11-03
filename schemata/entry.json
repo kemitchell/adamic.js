@@ -34,12 +34,16 @@
           "key": {
             "$ref": "#/definitions/64hex"
           },
+          "nonce": {
+            "$ref": "#/definitions/64hex"
+          },
           "signature": {
             "$ref": "#/definitions/128hex"
           }
         },
         "required": [
           "key",
+          "nonce",
           "signature"
         ]
       }

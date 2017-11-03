@@ -4,14 +4,23 @@
     "type": {
       "const": "unlink"
     },
-    "id": {
-      "type": "string",
-      "pattern": "[0-9a-f]{64}"
+    "key": {
+      "$ref": "#/definitions/64hex"
+    },
+    "entry": {
+      "$ref": "#/definitions/64hex"
     }
   },
   "required": [
     "type",
-    "id"
+    "key",
+    "entry"
   ],
-  "additionaProperties": false
+  "additionaProperties": false,
+  "definitions": {
+    "64hex": {
+      "type": "string",
+      "pattern": "[0-9a-f]{64}"
+    }
+  }
 }
