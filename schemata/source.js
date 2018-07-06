@@ -1,22 +1,11 @@
-{
-  "type": "object",
-  "properties": {
-    "type": {
-      "const": "source"
-    },
-    "id": {
-      "type": "string",
-      "pattern": "[0-9a-f]{64}"
-    },
-    "uri": {
-      "type": "string",
-      "pattern": "uri"
-    }
-  },
-  "required": [
-    "type",
-    "id",
-    "uri"
-  ],
-  "additionaProperties": false
-}
+var publicKey = require('./common/public-key')
+var strict = require('./strict')
+
+module.exports = strict({
+  type: 'object',
+  properties: {
+    type: {const: 'source'},
+    publicKey,
+    uri: {type: 'string', pattern: 'uri'}
+  }
+})

@@ -1,22 +1,12 @@
-{
-  "type": "object",
-  "properties": {
-    "type": {
-      "const": "confirm"
-    },
-    "id": {
-      "type": "string",
-      "pattern": "[0-9a-f]{64}"
-    },
-    "entry": {
-      "type": "string",
-      "pattern": "[0-9a-f]{64}"
-    }
-  },
-  "required": [
-    "type",
-    "id",
-    "entry"
-  ],
-  "additionaProperties": false
-}
+var entry = require('./common/entry')
+var publicKey = require('./common/public-key')
+var strict = require('./strict')
+
+module.exports = strict({
+  type: 'object',
+  properties: {
+    type: {const: 'confirm'},
+    publicKey,
+    entry
+  }
+})
