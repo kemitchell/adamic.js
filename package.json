@@ -6,11 +6,8 @@
   "repository": "kemitchell/adamic.js",
   "dependencies": {
     "ajv": "^5.2.2",
-    "ecb": "^1.0.0",
     "json-stable-stringify": "^1.0.1",
     "sodium-universal": "^2.0.0"
   },
-  "devDependencies": {
-    "ed25519": "0.0.4"
-  }
+  "devDependencies": {}
 }
