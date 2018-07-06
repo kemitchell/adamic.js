@@ -6,7 +6,7 @@ module.exports = strict({
   type: 'object',
   properties: {
     type: {const: 'name'},
-    key: string,
+    id: string,
     space: string,
     name
   }

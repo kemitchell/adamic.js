@@ -1,12 +1,10 @@
 var nonce = require('./common/nonce')
 var publicKey = require('./common/public-key')
 var signature = require('./common/signature')
+var strict = require('./strict')
 
-module.exports = {
+module.exports = strict({
   title: 'announcement message',
   type: 'object',
-  properties: {publicKey, nonce, signature},
-  additionalProperties: false
-}
-
-module.exports.required = Object.keys(module.exports.properties)
+  properties: {publicKey, nonce, signature}
+})
